@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
 from sqlalchemy.sql import text
-from config.database import db
+from config.database import db, init_db
 
 app = Flask(__name__)
 
@@ -11,11 +11,12 @@ app = Flask(__name__)
 load_dotenv('.env')
 
 # Configure the SQLAlchemy URI
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}/{os.getenv('DB_DATABASE')}"
+# app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}/{os.getenv('DB_DATABASE')}"
 
 # Initialize SQLAlchemy with the app
 # db = SQLAlchemy(app)
-db.init_app(app)
+# db.init_app(app)
+init_db(app)
 
 # Test the database connection (optional)
 @app.route('/')
